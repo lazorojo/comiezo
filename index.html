@@ -1,126 +1,86 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-<meta charset="UTF-8">
-<title>Mi Diario</title>
+<title>Mi diario</title>
 
 <style>
-/* -----------------------------
-   COLORES BASE (Aesthetic)
------------------------------- */
+/* Colores base */
 :root{
-  --paper:#fff7fa;       /* Papel rosita claro */
-  --accent:#e88bd8;      /* Rosado pastel */
-  --text:#333;
+  --paper:#fffaf3;
+  --accent:#b56bd6;
+  --muted:#6b6b6b;
 }
 
-/* -----------------------------
-   ESTILOS GENERALES
------------------------------- */
-html, body{
-  margin:0;
-  padding:0;
+/* Fondo general */
+html,body{
   height:100%;
-  font-family: "Segoe UI", Arial, sans-serif;
-  color:var(--text);
-  background-color:#ffe4f3;
+  margin:0;
+  font-family:"Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  color:#222;
 }
 
-/* -----------------------------
-   FONDO DE MOÑOS REPELTE KAWAII
------------------------------- */
+/* FONDO DE MOÑOS KAWAII (PATRÓN COMPLETO) */
 body{
-  background-image: url("data:image/svg+xml;utf8,
-  <svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'>
-    <g transform='translate(80,80) scale(0.85)'>
-      <!-- Lazo izquierdo -->
-      <path d='M-55 -15 C -100 -45 -100 45 -55 15 C -40 5 -40 -5 -55 -15 z'
-            fill='%23ff8fc8'/>
-      <!-- Lazo derecho -->
-      <path d='M55 -15 C 100 -45 100 45 55 15 C 40 5 40 -5 55 -15 z'
-            fill='%23ff8fc8'/>
-      <!-- Centro -->
-      <circle cx='0' cy='0' r='22' fill='%23ffb3db'/>
+  background-color:#ffe8ef;
+  background-image:
+    url("data:image/svg+xml;utf8,
+    <svg xmlns='http://www.w3.org/2000/svg' width='150' height='150' viewBox='0 0 150 150'>
+      <g transform='translate(75,75)'>
+        <!-- Moño rojo kawaii -->
+        <path d='M-55 -15 C -90 -40 -90 40 -55 15 C -40 5 -40 -5 -55 -15 z' fill='%23ff4d6d'/>
+        <path d='M55 -15 C 90 -40 90 40 55 15 C 40 5 40 -5 55 -15 z' fill='%23ff4d6d'/>
+        <circle cx='0' cy='0' r='22' fill='%23ff6b81'/>
 
-      <!-- Carita kawaii -->
-      <circle cx='-8' cy='-2' r='4' fill='black'/>
-      <circle cx='8' cy='-2' r='4' fill='black'/>
-      <path d='M-4 6 Q 0 10 4 6' stroke='black' stroke-width='2' fill='none'/>
-    </g>
-  </svg>");
-  background-size:160px 160px;
+        <!-- Carita kawaii -->
+        <circle cx='-8' cy='-2' r='4' fill='black'/>
+        <circle cx='8' cy='-2' r='4' fill='black'/>
+        <path d='M-4 6 Q 0 10 4 6' stroke='black' stroke-width='2' fill='none'/>
+      </g>
+    </svg>");
+  background-size:150px 150px;
 }
 
-/* -----------------------------
-   TARJETA DEL DIARIO
------------------------------- */
-.diario{
+/* CONTENEDOR DEL DIARIO */
+#diario{
   background:var(--paper);
   width:85%;
   max-width:850px;
   margin:40px auto;
-  padding:30px 40px;
-  border-radius:18px;
-  border:2px solid #ffc6e6;
-  box-shadow:0 0 14px rgba(0,0,0,0.12);
+  padding:30px;
+  border-radius:15px;
+  border:2px solid #ffadc0;
+  box-shadow:0 0 12px rgba(0,0,0,0.15);
 }
 
-/* -----------------------------
-   TÍTULO Y SUBTÍTULO
------------------------------- */
+/* TÍTULO */
 h1{
   text-align:center;
   margin-top:0;
-  color:#d64cab;
-  font-size:2.2em;
+  color:#b56bd6;
+  font-size:2em;
 }
 
+/* SUBTÍTULO */
 h2{
   text-align:center;
   margin-top:-10px;
-  margin-bottom:25px;
-  color:#b84b9a;
-  font-size:1.3em;
+  color:#6b6b6b;
+  font-size:1.2em;
 }
 
-/* -----------------------------
-   TEXTO DEL DIARIO
------------------------------- */
-p, textarea{
+/* TEXTO */
+p{
   font-size:1.1em;
   line-height:1.6;
 }
-
-/* Área para escribir */
-textarea{
-  width:100%;
-  height:250px;
-  border-radius:10px;
-  border:1px solid #ffbde2;
-  padding:15px;
-  resize:none;
-  font-size:1.1em;
-  background:#fff;
-  outline:none;
-  box-shadow:0 0 8px rgba(255,180,220,0.5);
-  transition:0.2s;
-}
-
-textarea:focus{
-  border-color:#e875c8;
-  box-shadow:0 0 10px rgba(232,117,200,0.7);
-}
 </style>
 
-</head>
 <body>
 
-<div class="diario">
+<div id="diario">
   <h1>Mi Diario 🎀</h1>
-  <h2>Subtítulo o fecha aquí ✨</h2>
+  <h2>Subtítulo aquí</h2>
 
-  <textarea placeholder="Escribe aquí tu tema, pensamientos o lo que quieras guardar..."></textarea>
+  <p>
+    Escribe aquí tu historia, pensamientos, emociones o lo que quieras guardar.
+  </p>
 </div>
 
 </body>
-</html>
