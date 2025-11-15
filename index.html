@@ -1,86 +1,31 @@
-<title>Mi diario</title>
-
-<style>
-/* Colores base */
-:root{
-  --paper:#fffaf3;
-  --accent:#b56bd6;
-  --muted:#6b6b6b;
-}
-
-/* Fondo general */
-html,body{
-  height:100%;
-  margin:0;
-  font-family:"Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-  color:#222;
-}
-
-/* FONDO DE MOÑOS KAWAII (PATRÓN COMPLETO) */
-body{
-  background-color:#ffe8ef;
-  background-image:
-    url("data:image/svg+xml;utf8,
-    <svg xmlns='http://www.w3.org/2000/svg' width='150' height='150' viewBox='0 0 150 150'>
-      <g transform='translate(75,75)'>
-        <!-- Moño rojo kawaii -->
-        <path d='M-55 -15 C -90 -40 -90 40 -55 15 C -40 5 -40 -5 -55 -15 z' fill='%23ff4d6d'/>
-        <path d='M55 -15 C 90 -40 90 40 55 15 C 40 5 40 -5 55 -15 z' fill='%23ff4d6d'/>
-        <circle cx='0' cy='0' r='22' fill='%23ff6b81'/>
-
-        <!-- Carita kawaii -->
-        <circle cx='-8' cy='-2' r='4' fill='black'/>
-        <circle cx='8' cy='-2' r='4' fill='black'/>
-        <path d='M-4 6 Q 0 10 4 6' stroke='black' stroke-width='2' fill='none'/>
-      </g>
-    </svg>");
-  background-size:150px 150px;
-}
-
-/* CONTENEDOR DEL DIARIO */
-#diario{
-  background:var(--paper);
-  width:85%;
-  max-width:850px;
-  margin:40px auto;
-  padding:30px;
-  border-radius:15px;
-  border:2px solid #ffadc0;
-  box-shadow:0 0 12px rgba(0,0,0,0.15);
-}
-
-/* TÍTULO */
-h1{
-  text-align:center;
-  margin-top:0;
-  color:#b56bd6;
-  font-size:2em;
-}
-
-/* SUBTÍTULO */
-h2{
-  text-align:center;
-  margin-top:-10px;
-  color:#6b6b6b;
-  font-size:1.2em;
-}
-
-/* TEXTO */
-p{
-  font-size:1.1em;
-  line-height:1.6;
-}
-</style>
-
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mi Diario Estético</title>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
 <body>
-
-<div id="diario">
-  <h1>Mi Diario 🎀</h1>
-  <h2>Subtítulo aquí</h2>
-
-  <p>
-    Escribe aquí tu historia, pensamientos, emociones o lo que quieras guardar.
-  </p>
-</div>
-
+    <div class="diary-container">
+        <header class="diary-header">
+            <h1 class="diary-title">El Diario de Mis Pensamientos</h1>
+            <h2 class="diary-subtitle">Notas desde un rincón secreto del alma</h2>
+        </header>
+        
+        <main class="diary-content">
+            <p>
+                Hoy, el cielo estaba teñido de un suave color melocotón, un presagio de la tranquilidad que he estado buscando. Las páginas de este diario son mi refugio, un lugar donde las palabras fluyen sin la necesidad de un juicio. Es curioso cómo un simple trozo de papel puede guardar tanto, ¿no crees?
+            </p>
+            <p>
+                La vida es una colección de pequeños momentos. La risa compartida, el aroma a café por la mañana, la sensación de un libro nuevo entre las manos... Todo se entrelaza como los hilos de un tapiz. Quizás la verdadera belleza no reside en lo grandioso, sino en la **delicadeza** de lo cotidiano. Este es mi recordatorio de vivir en el ahora.
+            </p>
+        </main>
+        
+        <footer class="diary-footer">
+            <p>— 15 de Noviembre, 2025</p>
+        </footer>
+    </div>
 </body>
+</html>
