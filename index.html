@@ -1,0 +1,118 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Mi diario</title>
+  <style>
+    /* Fondo con patrón de moños (SVG embebido) */
+    :root{
+      --paper:#fffaf3;
+      --accent:#b56bd6;
+      --muted:#6b6b6b;
+    }
+    html,body{height:100%;margin:0;font-family: "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;background:linear-gradient(180deg,#fff 0%, #fffaf3 100%);color:#222}
+    body{
+      /* patrón repetido de moños */
+      background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="160" height="160" viewBox="0 0 160 160"><g fill="%23f7e9ff"><rect width="160" height="160" fill="%23fffaf3"/></g><g fill="%23f0d5ff"><path d="M40 80c0-22 40-22 40 0s-40 22-40 0z"/></g><g fill="%23d6b3ff"><path d="M40 80c0-22 40-22 40 0s-40 22-40 0z" transform="translate(80,0) scale(-1,1)"/></g><g transform="translate(0,60)" fill="%23b58ae6"><circle cx="20" cy="20" r="6"/><circle cx="60" cy="20" r="6"/><path d="M10 30 C20 40, 40 40, 50 30" stroke="%23b58ae6" stroke-width="2" fill="none"/></g></svg>');
+      background-repeat: repeat;
+      background-size: 180px 180px;
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+    }
+
+    .page {
+      max-width: 900px;
+      margin: 32px auto;
+      background: linear-gradient(180deg, rgba(255,255,255,0.9), rgba(255,255,255,0.95));
+      box-shadow: 0 8px 30px rgba(0,0,0,0.08);
+      border-radius: 12px;
+      padding: 28px;
+      border: 1px solid rgba(180,105,214,0.08);
+    }
+
+    /* Cabecera tipo diario */
+    header.diary-header{
+      text-align:center;
+      padding: 12px 8px 24px;
+      border-bottom: 1px dashed rgba(0,0,0,0.04);
+      margin-bottom:18px;
+    }
+
+    h1.title {
+      margin: 6px 0 6px;
+      font-size: clamp(28px, 6vw, 48px);
+      letter-spacing: 1px;
+      color: var(--accent);
+      font-weight:700;
+      display:inline-block;
+      padding: 6px 14px;
+      border-radius: 10px;
+      background: linear-gradient(90deg, rgba(181,107,214,0.08), rgba(181,107,214,0.04));
+      cursor:text;
+      outline: none;
+    }
+    .subtitle {
+      color: var(--muted);
+      font-size:14px;
+      margin-top:6px;
+    }
+
+    /* Entradas del diario */
+    .entries { display:flex; flex-direction:column; gap:14px; margin-top:20px; }
+    .entry {
+      background: linear-gradient(180deg,#ffffff,#fffdf8);
+      border-radius:10px;
+      padding:14px;
+      border:1px solid rgba(0,0,0,0.03);
+      box-shadow: 0 6px 14px rgba(0,0,0,0.03);
+    }
+    .entry .date { font-size:12px; color:var(--muted); margin-bottom:8px; }
+    .entry p { margin:0; line-height:1.5; color:#333; }
+
+    /* Botón simple para agregar entrada (solo visual, no requiere JavaScript) */
+    .actions { display:flex; gap:10px; justify-content:center; margin-top:18px; }
+    .btn {
+      background: var(--accent); color:white; padding:10px 14px; border-radius:10px; text-decoration:none; font-weight:600; box-shadow: 0 6px 14px rgba(181,107,214,0.12);
+    }
+
+    /* Mobile tweaks */
+    @media (max-width:520px){
+      .page{ margin:16px; padding:18px;}
+      h1.title{ font-size:30px; }
+    }
+
+    /* Indicaciones pequeñas */
+    .hint{ font-size:13px; color:var(--muted); text-align:center; margin-top:8px; }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <header class="diary-header">
+      <!-- Título editable: haz click y escribe -->
+      <h1 class="title" contenteditable="true" aria-label="Título editable">Mi Diario</h1>
+      <div class="subtitle">Conmenzando, diario de moño.</div>
+    </header>
+
+    <main>
+      <div class="entries">
+        <article class="entry">
+          <div class="date">15 noviembre 2025</div>
+          <p>Hoy empecé mi diario. Estoy aprendiendo HTML y CSS. Por ahora le pedi a chagpt que hiciera mi pagina, pero de a poco lograre formarlo por mi misma, esto solo sera el comienzo, tengo 21 años, las cosas no son tan faciles, pero espero mejorar.</p>
+        </article>
+
+        <article class="entry">
+          <div class="date">8 noviembre 2025</div>
+          <p>Practicando programación y creando mi página pública. Poco a poco avanzo.</p>
+        </article>
+      </div>
+
+      <div class="actions">
+        <a class="btn" href="#" onclick="alert('Para agregar entradas, edita el HTML o usa un editor en tu repo'); return false;">Agregar entrada</a>
+      </div>
+
+      <div class="hint">Este diseño es estático (sin base de datos). Para agregar entradas reales puedes editar el archivo index.html en GitHub o aprender JavaScript más adelante.</div>
+    </main>
+  </div>
+</body>
+</html>
