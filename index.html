@@ -3,29 +3,141 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mi Diario Estético</title>
-    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="style.css">
+    <title>Mi Diario Kawaii 💖</title>
+    <style>
+        /* Colores base */
+        :root {
+            --paper: #fefefe; /* Blanco suave para el contenido */
+            --background-base: #f7e6e6; /* Rosa muy pálido para el fondo */
+            --ribbon-red: #ff3366; /* Rojo vibrante para los moños y acentos */
+            --accent-pink: #f2a6bf; /* Rosa medio para líneas o detalles */
+            --text-color: #333333; /* Gris oscuro para texto */
+        }
+
+        /* FONDO GENERAL y FUENTE */
+        html, body {
+            height: 100%;
+            margin: 0;
+            /* Una fuente linda y cursiva para un toque personal */
+            font-family: 'Comic Sans MS', 'Cursive', sans-serif; 
+            color: var(--text-color);
+            background-color: var(--background-base);
+            padding: 20px;
+            box-sizing: border-box;
+        }
+
+        /* PATRÓN DE MOÑOS ROJOS KAWAII */
+        body {
+            /* Patrón SVG de moños rojos más simple y limpio */
+            background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='100' height='100' viewBox='0 0 100 100'><path fill='%23ff3366' d='M0 50 L50 0 L100 50 L50 100 Z M50 25 C35 25, 25 35, 25 50 C25 65, 35 75, 50 75 C65 75, 75 65, 75 50 C75 35, 65 25, 50 25 Z'/><circle cx='50' cy='50' r='10' fill='%23f2a6bf'/><g transform='translate(50,50)'><path fill='%23ff3366' d='M-15 -10 C -30 -20 -30 20 -15 10 C -5 5 -5 -5 -15 -10 z'/><path fill='%23ff3366' d='M15 -10 C 30 -20 30 20 15 10 C 5 5 5 -5 15 -10 z'/><circle cx='0' cy='0' r='8' fill='%23ff6699'/></g><g transform='translate(0,0)'><path fill='%23ff3366' d='M-15 -10 C -30 -20 -30 20 -15 10 C -5 5 -5 -5 -15 -10 z'/><path fill='%23ff3366' d='M15 -10 C 30 -20 30 20 15 10 C 5 5 5 -5 15 -10 z'/><circle cx='0' cy='0' r='8' fill='%23ff6699'/></g><g transform='translate(100,100)'><path fill='%23ff3366' d='M-15 -10 C -30 -20 -30 20 -15 10 C -5 5 -5 -5 -15 -10 z'/><path fill='%23ff3366' d='M15 -10 C 30 -20 30 20 15 10 C 5 5 5 -5 15 -10 z'/><circle cx='0' cy='0' r='8' fill='%23ff6699'/></g><g transform='translate(0,100)'><path fill='%23ff3366' d='M-15 -10 C -30 -20 -30 20 -15 10 C -5 5 -5 -5 -15 -10 z'/><path fill='%23ff3366' d='M15 -10 C 30 -20 30 20 15 10 C 5 5 5 -5 15 -10 z'/><circle cx='0' cy='0' r='8' fill='%23ff6699'/></g><g transform='translate(100,0)'><path fill='%23ff3366' d='M-15 -10 C -30 -20 -30 20 -15 10 C -5 5 -5 -5 -15 -10 z'/><path fill='%23ff3366' d='M15 -10 C 30 -20 30 20 15 10 C 5 5 5 -5 15 -10 z'/><circle cx='0' cy='0' r='8' fill='%23ff6699'/></g></svg>");
+            background-size: 100px 100px;
+            background-repeat: repeat;
+        }
+
+        /* ESTILO DEL CONTENEDOR PRINCIPAL DEL DIARIO */
+        .diary-container {
+            width: 90%;
+            max-width: 750px;
+            margin: 20px auto;
+            background-color: var(--paper);
+            border-radius: 15px;
+            padding: 40px;
+            box-shadow: 
+                0 10px 30px rgba(0, 0, 0, 0.1), /* Sombra suave para efecto 3D */
+                0 0 0 10px var(--accent-pink); /* Borde rosa alrededor */
+            min-height: calc(100vh - 40px); /* Ocupa casi toda la altura visible */
+            position: relative;
+        }
+
+        /* TÍTULO */
+        h1 {
+            text-align: center;
+            color: var(--ribbon-red);
+            font-size: 2.8em;
+            margin-bottom: 20px;
+            text-shadow: 1px 1px 2px rgba(255, 100, 100, 0.4);
+        }
+
+        /* ESTILO PARA LAS ENTRADAS DE DIARIO (ejemplo) */
+        .entry {
+            border-top: 2px dashed var(--accent-pink); /* Línea de separación linda */
+            padding-top: 25px;
+            margin-top: 30px;
+        }
+
+        .entry:first-of-type {
+            border-top: none;
+            margin-top: 0;
+            padding-top: 0;
+        }
+
+        .entry-date {
+            font-size: 1.1em;
+            color: var(--ribbon-red);
+            font-weight: bold;
+            margin-bottom: 10px;
+            display: block;
+        }
+
+        .entry-content {
+            line-height: 1.6;
+            text-align: justify;
+        }
+
+        /* SIMULACIÓN DE LÍNEAS DE CUADERNO */
+        .ruled-area {
+            position: relative;
+            padding: 10px 0;
+        }
+
+        .ruled-line {
+            position: absolute;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: repeating-linear-gradient(
+                to bottom,
+                transparent,
+                transparent 24px, /* Espacio entre líneas */
+                var(--accent-pink) 25px, /* La línea rosa */
+                var(--accent-pink) 26px /* Grosor de la línea */
+            );
+            bottom: 0;
+            top: 0;
+            z-index: 1;
+            opacity: 0.3; /* Para que las líneas sean sutiles */
+        }
+
+        /* El área de texto debe estar encima de las líneas */
+        .entry-content, .ruled-line {
+            position: relative;
+            z-index: 2; 
+        }
+    </style>
 </head>
 <body>
+
     <div class="diary-container">
-        <header class="diary-header">
-            <h1 class="diary-title">El Diario de Mis Pensamientos</h1>
-            <h2 class="diary-subtitle">Notas desde un rincón secreto del alma</h2>
-        </header>
-        
-        <main class="diary-content">
-            <p>
-                Hoy, el cielo estaba teñido de un suave color melocotón, un presagio de la tranquilidad que he estado buscando. Las páginas de este diario son mi refugio, un lugar donde las palabras fluyen sin la necesidad de un juicio. Es curioso cómo un simple trozo de papel puede guardar tanto, ¿no crees?
-            </p>
-            <p>
-                La vida es una colección de pequeños momentos. La risa compartida, el aroma a café por la mañana, la sensación de un libro nuevo entre las manos... Todo se entrelaza como los hilos de un tapiz. Quizás la verdadera belleza no reside en lo grandioso, sino en la **delicadeza** de lo cotidiano. Este es mi recordatorio de vivir en el ahora.
-            </p>
-        </main>
-        
-        <footer class="diary-footer">
-            <p>— 15 de Noviembre, 2025</p>
-        </footer>
+        <h1>Mi Diario 💖</h1>
+        <div class="ruled-area">
+            <div class="ruled-line"></div>
+            
+            <div class="entry">
+                <span class="entry-date">15 de Noviembre, 2025 - Sábado</span>
+                <p class="entry-content">
+                    ¡Qué día tan bonito! Hoy fui a la cafetería nueva y probé su pastel de fresa. Era tan dulce y lindo, casi como un moño perfectamente atado. Me recordó a cuando era pequeña y mi abuela me hacía lazos. Definitivamente, tengo que volver. La vida está llena de pequeños momentos adorables si sabes dónde mirar. Estoy muy feliz. ✨
+                </p>
+            </div>
+            
+            <div class="entry">
+                <span class="entry-date">14 de Noviembre, 2025 - Viernes</span>
+                <p class="entry-content">
+                    Terminé de leer el libro que me recomendó mi amiga. Fue un poco triste al final, pero me hizo pensar mucho en la importancia de ser amable con todos. Mañana tengo que comprar nuevos stickers para decorar mis apuntes. ¡Necesito algo con muchos brillos y, por supuesto, más moños! 🎀
+                </p>
+            </div>
+
+            </div>
     </div>
+    
 </body>
 </html>
