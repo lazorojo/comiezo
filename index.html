@@ -3,53 +3,141 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mi Mi diario 🧑‍🎓🎀</title>
+    <title>Mi Diario 🧑‍🎓🎀 - Páginas con Volteo</title>
     <style>
-        /* Colores base */
+        /* [ ... TUS ESTILOS ORIGINALES PARA COLORES Y FUENTES ... ] */
         :root {
-            --paper: #fefefe; /* Blanco suave para el contenido */
-            --background-base: #f7e6e6; /* Rosa muy pálido para el fondo */
-            --ribbon-red: #ff3366; /* Rojo vibrante para los moños y acentos */
-            --accent-pink: #f2a6bf; /* Rosa medio para líneas o detalles */
-            --text-color: #333333; /* Gris oscuro para texto */
+            --paper: #fefefe; 
+            --background-base: #f7e6e6; 
+            --ribbon-red: #ff3366; 
+            --accent-pink: #f2a6bf; 
+            --text-color: #333333; 
         }
 
         /* FONDO GENERAL y FUENTE */
         html, body {
             height: 100%;
             margin: 0;
-            /* Una fuente linda y cursiva para un toque personal */
             font-family: 'Comic Sans MS', 'Cursive', sans-serif; 
             color: var(--text-color);
             background-color: var(--background-base);
             padding: 20px;
             box-sizing: border-box;
+            /* Se elimina el patrón de moños del body para que el libro sea el foco */
         }
-
-        /* PATRÓN DE MOÑOS ROJOS KAWAII */
-        body {
-            /* Patrón SVG de moños rojos más simple y limpio */
+        
+        /* PATRÓN DE MOÑOS KAWAII - Aplicado a un fondo para no interferir con el 3D */
+        .page-background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1; /* Fondo detrás de todo */
             background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='100' height='100' viewBox='0 0 100 100'><path fill='%23ff3366' d='M0 50 L50 0 L100 50 L50 100 Z M50 25 C35 25, 25 35, 25 50 C25 65, 35 75, 50 75 C65 75, 75 65, 75 50 C75 35, 65 25, 50 25 Z'/><circle cx='50' cy='50' r='10' fill='%23f2a6bf'/><g transform='translate(50,50)'><path fill='%23ff3366' d='M-15 -10 C -30 -20 -30 20 -15 10 C -5 5 -5 -5 -15 -10 z'/><path fill='%23ff3366' d='M15 -10 C 30 -20 30 20 15 10 C 5 5 5 -5 15 -10 z'/><circle cx='0' cy='0' r='8' fill='%23ff6699'/></g><g transform='translate(0,0)'><path fill='%23ff3366' d='M-15 -10 C -30 -20 -30 20 -15 10 C -5 5 -5 -5 -15 -10 z'/><path fill='%23ff3366' d='M15 -10 C 30 -20 30 20 15 10 C 5 5 5 -5 15 -10 z'/><circle cx='0' cy='0' r='8' fill='%23ff6699'/></g><g transform='translate(100,100)'><path fill='%23ff3366' d='M-15 -10 C -30 -20 -30 20 -15 10 C -5 5 -5 -5 -15 -10 z'/><path fill='%23ff3366' d='M15 -10 C 30 -20 30 20 15 10 C 5 5 5 -5 15 -10 z'/><circle cx='0' cy='0' r='8' fill='%23ff6699'/></g><g transform='translate(0,100)'><path fill='%23ff3366' d='M-15 -10 C -30 -20 -30 20 -15 10 C -5 5 -5 -5 -15 -10 z'/><path fill='%23ff3366' d='M15 -10 C 30 -20 30 20 15 10 C 5 5 5 -5 15 -10 z'/><circle cx='0' cy='0' r='8' fill='%23ff6699'/></g><g transform='translate(100,0)'><path fill='%23ff3366' d='M-15 -10 C -30 -20 -30 20 -15 10 C -5 5 -5 -5 -15 -10 z'/><path fill='%23ff3366' d='M15 -10 C 30 -20 30 20 15 10 C 5 5 5 -5 15 -10 z'/><circle cx='0' cy='0' r='8' fill='%23ff6699'/></g></svg>");
             background-size: 100px 100px;
             background-repeat: repeat;
         }
 
-        /* ESTILO DEL CONTENEDOR PRINCIPAL DEL DIARIO */
-        .diary-container {
-            width: 90%;
-            max-width: 750px;
-            margin: 20px auto;
+        /* ----------------------------------------------------- */
+        /* ESTRUCTURA 3D DEL LIBRO Y LA PÁGINA                 */
+        /* ----------------------------------------------------- */
+
+        .book {
+            width: 750px;
+            height: 90vh; /* Ajustado para que quepa en la pantalla */
+            position: relative;
+            perspective: 1500px; /* Perspectiva 3D para la animación */
+            margin: 0 auto;
+        }
+
+        .page-wrap {
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            top: 0;
+            left: 0;
+            /* La clave para el 3D */
+            transform-style: preserve-3d;
+            transform-origin: left center; /* El punto de giro es el borde izquierdo */
+            transition: transform 1.2s ease-in-out; /* Velocidad de la animación */
+            z-index: 10;
+        }
+
+        /* Clase para el volteo de página */
+        .flipped {
+            transform: rotateY(-180deg);
+        }
+
+        .page {
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            top: 0;
+            left: 0;
             background-color: var(--paper);
             border-radius: 15px;
             padding: 40px;
-            box-shadow: 
-                0 10px 30px rgba(0, 0, 0, 0.1), /* Sombra suave para efecto 3D */
-                0 0 0 10px var(--accent-pink); /* Borde rosa alrededor */
-            min-height: calc(100vh - 40px); /* Ocupa casi toda la altura visible */
-            position: relative;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            backface-visibility: hidden; /* Oculta la parte trasera de la página para la rotación */
+            box-sizing: border-box;
+            border: 10px solid var(--accent-pink); /* Borde rosa (cambiado de shadow a border) */
+            
+        }
+        
+        /* La página de atrás (cuando se voltea) */
+        .page-back {
+            transform: rotateY(180deg);
+            z-index: 5;
+            /* Podemos hacer que la parte de atrás tenga un color diferente */
+            background-color: #fcf0f0; 
+            border: 10px solid var(--accent-pink);
         }
 
-        /* TÍTULO */
+        /* ----------------------------------------------------- */
+        /* BOTONES DE NAVEGACIÓN                                 */
+        /* ----------------------------------------------------- */
+        .nav-buttons {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 100%;
+            max-width: 800px; /* Para que los botones se queden fuera de la página */
+            display: flex;
+            justify-content: space-between;
+            pointer-events: none; /* Permite hacer clic a través del contenedor */
+            z-index: 20;
+        }
+
+        .nav-buttons button {
+            /* Estilo Kawaii para los botones */
+            background-color: var(--ribbon-red);
+            color: white;
+            border: 3px solid var(--accent-pink);
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            font-size: 1.5em;
+            cursor: pointer;
+            pointer-events: auto; /* Habilita el clic en el botón */
+            box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
+            transition: background-color 0.2s;
+        }
+
+        .nav-buttons button:hover {
+            background-color: #ff6699;
+        }
+
+        .prev-btn {
+            margin-left: -50px;
+        }
+
+        .next-btn {
+            margin-right: -50px;
+        }
+
+        /* [ ... TUS ESTILOS ORIGINALES PARA TÍTULO Y ENTRADAS ... ] */
         h1 {
             text-align: center;
             color: var(--ribbon-red);
@@ -58,9 +146,8 @@
             text-shadow: 1px 1px 2px rgba(255, 100, 100, 0.4);
         }
 
-        /* ESTILO PARA LAS ENTRADAS DE DIARIO (ejemplo) */
         .entry {
-            border-top: 2px dashed var(--accent-pink); /* Línea de separación linda */
+            border-top: 2px dashed var(--accent-pink); 
             padding-top: 25px;
             margin-top: 30px;
         }
@@ -83,7 +170,7 @@
             line-height: 1.6;
             text-align: justify;
         }
-
+        
         /* SIMULACIÓN DE LÍNEAS DE CUADERNO */
         .ruled-area {
             position: relative;
@@ -98,17 +185,16 @@
             background: repeating-linear-gradient(
                 to bottom,
                 transparent,
-                transparent 24px, /* Espacio entre líneas */
-                var(--accent-pink) 25px, /* La línea rosa */
-                var(--accent-pink) 26px /* Grosor de la línea */
+                transparent 24px, 
+                var(--accent-pink) 25px, 
+                var(--accent-pink) 26px 
             );
             bottom: 0;
             top: 0;
             z-index: 1;
-            opacity: 0.3; /* Para que las líneas sean sutiles */
+            opacity: 0.3;
         }
 
-        /* El área de texto debe estar encima de las líneas */
         .entry-content, .ruled-line {
             position: relative;
             z-index: 2; 
@@ -117,27 +203,76 @@
 </head>
 <body>
 
-    <div class="diary-container">
-        <h1>Mi Diario 💖</h1>
-        <div class="ruled-area">
-            <div class="ruled-line"></div>
-            
-            <div class="entry">
-                <span class="entry-date">15 de Noviembre, 2025 - Sábado</span>
-                <p class="entry-content">
-                   Hoy es 15/11/25, logre hacer mi primera pagina, me esforce por hacerlo a mi gusto, aunque no lo hice todo yo, todo lo hizo chagpt, pero con el tiempo lograre crearlo por mi cuenta.
-                </p>
-            </div>
-            
-            <div class="entry">
-                <span class="entry-date">14 de Noviembre, 2025 - Viernes</span>
-                <p class="entry-content">
-Con esto espero lograr mis metas, aprender ingles, saber mas de matematicas y saber a programar, mas avanzado, entrar en la universidad, entrar a la universidad de la ESPOL, pero tambien agradecer a mi madre por el apoyo que me da. Francis Liliana Cirino ese es su nombre al igual que mi abuelito, Banchon mi apoyo, llegare lejos y conseguire mi  maestria y beca. ✊✊✊
-                </p>
-            </div>
+    <div class="page-background"></div>
 
+    <div class="book">
+        
+        <div class="page-wrap" id="page-flip">
+            <div class="page page-front">
+                <h1>Mi Diario 💖 (Página 1)</h1>
+                <div class="ruled-area">
+                    <div class="ruled-line"></div>
+                    
+                    <div class="entry">
+                        <span class="entry-date">15 de Noviembre, 2025 - Sábado</span>
+                        <p class="entry-content">
+                            Hoy es 15/11/25, logre hacer mi primera pagina, me esforce por hacerlo a mi gusto, aunque no lo hice todo yo, todo lo hizo chagpt, pero con el tiempo lograre crearlo por mi cuenta.
+                        </p>
+                    </div>
+                    
+                    <div class="entry">
+                        <span class="entry-date">14 de Noviembre, 2025 - Viernes</span>
+                        <p class="entry-content">
+                            Con esto espero lograr mis metas, aprender ingles, saber mas de matematicas y saber a programar, mas avanzado, entrar en la universidad, entrar a la universidad de la ESPOL, pero tambien agradecer a mi madre por el apoyo que me da. Francis Liliana Cirino ese es su nombre al igual que mi abuelito, Banchon mi apoyo, llegare lejos y conseguire mi maestria y beca. ✊✊✊
+                        </p>
+                    </div>
+
+                </div>
             </div>
+            
+            <div class="page page-back">
+                 <h1>Página 1 - Reverso 🎀</h1>
+                 <p style="text-align: center; margin-top: 100px;">¡Este es el reverso de la primera página!</p>
+            </div>
+        </div>
+
+        <div class="page page-fixed">
+            <h1>Mi Diario 💖 (Página 2)</h1>
+            <div class="ruled-area">
+                <div class="ruled-line"></div>
+                <p class="entry-content">
+                    ¡Esta es la siguiente página! Una vez que la página anterior se ha volteado, este contenido se revela. 
+                    Aquí puedes poner tus siguientes entradas de diario. 
+                </p>
+                <div class="entry">
+                    <span class="entry-date">16 de Noviembre, 2025 - Domingo</span>
+                    <p class="entry-content">
+                        ¡Logré el efecto de pasar de página! ¡Qué emoción ver mi diario animado! Ahora solo me queda seguir llenándolo.
+                    </p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="nav-buttons">
+             <button class="prev-btn" onclick="flipPage(false)">&#9664;</button> <button class="next-btn" onclick="flipPage(true)">&#9654;</button> </div>
+
     </div>
-    
+
+    <script>
+        const page = document.getElementById('page-flip');
+        let isFlipped = false;
+
+        function flipPage(direction) {
+            // Si la dirección es 'true' (Next/Siguiente) y la página no está volteada, la volteamos.
+            if (direction && !isFlipped) {
+                page.classList.add('flipped');
+                isFlipped = true;
+            // Si la dirección es 'false' (Prev/Anterior) y la página está volteada, la regresamos.
+            } else if (!direction && isFlipped) {
+                page.classList.remove('flipped');
+                isFlipped = false;
+            }
+        }
+    </script>
 </body>
 </html>
