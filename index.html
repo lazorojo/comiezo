@@ -6,21 +6,23 @@
     <title>Mi Diario Kawaii</title>
 
     <style>
-        /* ---------------------------
-           FONDO KAWAII (MOÑOS SVG)
-           --------------------------- */
-        body {
-            margin: 0;
-            padding: 0;
-            font-family: "Comic Sans MS", cursive, sans-serif;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
+    /* ---------------------------
+        FONDO KAWAII (MOÑOS SVG)
+        --------------------------- */
+    body {
+        margin: 0;
+        padding: 0;
+        font-family: "Comic Sans MS", cursive, sans-serif;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+        padding: 50px 0;
 
-            /* patrón SVG embebido */
-            background-color: #ffe6f2;
-            background-image: url("data:image/svg+xml;utf8,\
+        /* patrón SVG embebido */
+        background-color: #ffe6f2;
+        background-image: url("data:image/svg+xml;utf8,\
 <svg xmlns='http://www.w3.org/2000/svg' width='120' height='120' viewBox='0 0 120 120'>\
 <rect width='120' height='120' fill='%23ffe6f2'/>\
 <g transform='translate(60,60)'>\
@@ -29,166 +31,207 @@
 <circle cx='0' cy='0' r='14' fill='%23ff9fcf'/>\
 </g>\
 </svg>");
-            background-size: 120px 120px;
+        background-size: 120px 120px;
+    }
+
+    /* ---------------------------
+        MOÑO ANIMADO
+        --------------------------- */
+    #bow-ribbon {
+        /* Tamaño y posición absoluta para que no interfiera con el libro */
+        position: absolute; 
+        top: 70px; /* Ajusta la posición vertical */
+        right: 20px; /* Ajusta la posición horizontal */
+        z-index: 100; /* Asegura que esté por encima del libro */
+
+        /* Dimensiones del contenedor del moño */
+        width: 180px;
+        height: 210px;
+    }
+
+    /* SVG del moño para la animación */
+    #bow-ribbon svg {
+        width: 100%;
+        height: 100%;
+    }
+
+    /* Clase que aplica la animación al moño completo (al path/circle) */
+    .animated-bow {
+        animation-name: red-fade; 
+        animation-duration: 4s; 
+        animation-iteration-count: infinite; /* Para que se repita siempre */
+        animation-direction: alternate; /* Para que vaya y vuelva suavemente */
+    }
+
+    /* Keyframes para la transición de rojo oscuro a rojo claro y tonos pastel */
+    @keyframes red-fade {
+        0% {
+            fill: #8B0000; /* Rojo Oscuro (Maroon) */
         }
-
-        /* ---------------------------
-           CONTENEDOR DEL LIBRO
-           --------------------------- */
-        .book {
-            width: 800px;
-            height: 500px;
-            position: relative;
-            perspective: 2000px;
+        50% {
+            fill: #FF4500; /* Rojo/Naranja Vibrante (OrangeRed) */
         }
-
-        /* Cada spread abarca todo el contenedor para controlar el giro.
-           La hoja real (.page) estará centrada y más pequeña para mostrar fondo. */
-        .page-spread {
-            width: 100%;
-            height: 100%;
-            position: absolute;
-            top: 0;
-            left: 0;
-            transform-style: preserve-3d;
-            transform-origin: left center;
-            transition: transform 1s ease-in-out;
+        100% { 
+            fill: #FFB6C1; /* Rosa Pastel Suave (LightPink) */
         }
+    }
 
-        .page-spread.flipped {
-            transform: rotateY(-180deg);
-        }
+    /* ---------------------------
+        CONTENEDOR DEL LIBRO
+        --------------------------- */
+    .book {
+        width: 800px;
+        height: 500px;
+        position: relative;
+        perspective: 2000px;
+    }
 
-        /* ---------------------------
-           HOJA (PÁGINA) — centrada y más grande
-           --------------------------- */
-        .page {
-            /* La hoja (el cuadro blanco) ocupa la mayor parte del spread,
-               pero dejando un marco con los moñitos alrededor. */
-            width: 88%;
-            height: 86%;
-            position: absolute;
-            top: 0; left: 0; right: 0; bottom: 0;
-            margin: auto;                 /* centra la hoja en el spread */
-            background: #fffdf9;          /* color crema suave */
-            padding: 36px 48px;
-            box-sizing: border-box;
-            border-radius: 18px;
+    .page-spread {
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        top: 0;
+        left: 0;
+        transform-style: preserve-3d;
+        transform-origin: left center;
+        transition: transform 1s ease-in-out;
+    }
 
-            /* Borde kawaii tipo cuaderno */
-            border: 4px solid #ffb3d9;
-            outline: 6px double #ff7eb9;
+    .page-spread.flipped {
+        transform: rotateY(-180deg);
+    }
 
-            /* Sombra suave */
-            box-shadow: 0 10px 30px rgba(255, 150, 190, 0.25);
+    /* ---------------------------
+        HOJA (PÁGINA) — centrada y más grande
+        --------------------------- */
+    .page {
+        width: 88%;
+        height: 86%;
+        position: absolute;
+        top: 0; left: 0; right: 0; bottom: 0;
+        margin: auto;
+        background: #fffdf9;
+        padding: 36px 48px;
+        box-sizing: border-box;
+        border-radius: 18px;
 
-            backface-visibility: hidden;
-            overflow: hidden;
-            display: flex;
-            flex-direction: column;
-        }
+        border: 4px solid #ffb3d9;
+        outline: 6px double #ff7eb9;
 
-        .page-back {
-            transform: rotateY(180deg);
-        }
+        box-shadow: 0 10px 30px rgba(255, 150, 190, 0.25);
 
-        h1 {
-            text-align: center;
-            color: #ff7eb9;
-            text-shadow: 2px 2px #ffd1ea;
-            margin: 0;
-            padding-bottom: 6px;
-        }
+        backface-visibility: hidden;
+        overflow: hidden;
+        display: flex;
+        flex-direction: column;
+    }
 
-        /* ---------------------------
-           ÁREA DE TEXTO (cuadro interno)
-           más grande y centrado dentro de la hoja
-           --------------------------- */
-        .ruled-area {
-            position: relative;
-            margin: 18px auto 0 auto;    /* centra horizontalmente dentro de la hoja */
-            padding: 18px 20px;
-            width: 90%;                   /* ocupa gran parte de la hoja */
-            height: calc(100% - 90px);    /* deja espacio para título y margen inferior */
-            min-height: 220px;
-            box-sizing: border-box;
+    .page-back {
+        transform: rotateY(180deg);
+    }
 
-            /* Línea rosa tipo margen de cuaderno */
-            border-left: 4px solid #ff7eb9;
+    h1 {
+        text-align: center;
+        color: #ff7eb9;
+        text-shadow: 2px 2px #ffd1ea;
+        margin: 0;
+        padding-bottom: 6px;
+    }
 
-            /* Líneas horizontales suaves */
-            background-image: repeating-linear-gradient(
-                to bottom,
-                rgba(255, 120, 170, 0.14) 0px,
-                rgba(255, 120, 170, 0.14) 1px,
-                transparent 1px,
-                transparent 32px
-            );
+    /* ---------------------------
+        ÁREA DE TEXTO (cuadro interno)
+        --------------------------- */
+    .ruled-area {
+        position: relative;
+        margin: 18px auto 0 auto;
+        padding: 18px 20px;
+        width: 90%;
+        height: calc(100% - 90px);
+        min-height: 220px;
+        box-sizing: border-box;
 
-            background-color: rgba(255, 255, 255, 0.85); /* ligero translúcido para ver moñitos sutiles */
-            border-radius: 12px;
+        border-left: 4px solid #ff7eb9;
 
-            overflow-y: auto;
-        }
+        background-image: repeating-linear-gradient(
+            to bottom,
+            rgba(255, 120, 170, 0.14) 0px,
+            rgba(255, 120, 170, 0.14) 1px,
+            transparent 1px,
+            transparent 32px
+        );
 
-        .entry {
-            padding: 8px 6px;
-        }
+        background-color: rgba(255, 255, 255, 0.85);
+        border-radius: 12px;
 
-        .entry-date {
-            font-weight: bold;
-            color: #ff4fa3;
-            display: block;
-            margin-bottom: 6px;
-        }
+        overflow-y: auto;
+    }
 
-        .entry-content {
-            margin-bottom: 12px;
-            line-height: 1.6;
-            text-align: justify;
-        }
+    .entry {
+        padding: 8px 6px;
+    }
 
-        /* BOTONES */
-        .nav-buttons {
-            position: absolute;
-            bottom: -60px;
-            width: 100%;
-            display: flex;
-            justify-content: space-between;
-            left: 50%;
-            transform: translateX(-50%);
-            max-width: 800px;
-        }
+    .entry-date {
+        font-weight: bold;
+        color: #ff4fa3;
+        display: block;
+        margin-bottom: 6px;
+    }
 
-        button {
-            background: #ff7eb9;
-            color: white;
-            border: none;
-            padding: 12px 25px;
-            border-radius: 8px;
-            font-size: 18px;
-            cursor: pointer;
-            box-shadow: 0px 3px 8px rgba(0,0,0,0.2);
-            transition: 0.2s;
-        }
+    .entry-content {
+        margin-bottom: 12px;
+        line-height: 1.6;
+        text-align: justify;
+    }
 
-        button:hover {
-            background: #ff4fa3;
-        }
+    /* BOTONES */
+    .nav-buttons {
+        position: absolute;
+        bottom: -60px;
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        left: 50%;
+        transform: translateX(-50%);
+        max-width: 800px;
+    }
 
-        /* Responsive pequeño */
-        @media (max-width: 860px) {
-            .book { width: 92%; height: 70vh; }
-            .page { width: 92%; height: 84%; padding: 24px; }
-            .ruled-area { width: 92%; height: calc(100% - 80px); }
-        }
-    </style>
+    button {
+        background: #ff7eb9;
+        color: white;
+        border: none;
+        padding: 12px 25px;
+        border-radius: 8px;
+        font-size: 18px;
+        cursor: pointer;
+        box-shadow: 0px 3px 8px rgba(0,0,0,0.2);
+        transition: 0.2s;
+    }
+
+    button:hover {
+        background: #ff4fa3;
+    }
+
+    /* Responsive pequeño */
+    @media (max-width: 860px) {
+        .book { width: 92%; height: 70vh; }
+        .page { width: 92%; height: 84%; padding: 24px; }
+        .ruled-area { width: 92%; height: calc(100% - 80px); }
+    }
+</style>
 </head>
 <body>
 
+<div id="bow-ribbon">
+    <svg xmlns='http://www.w3.org/2000/svg' width='70' height='70' viewBox='-60 -60 120 120'>
+        <g transform='scale(1)'>
+            <path d='M-35 -15 C -55 -35 -55 35 -35 15 C -15 5 -15 -5 -35 -15 Z' class="animated-bow"/>
+            <path d='M35 -15 C 55 -35 55 35 35 15 C 15 5 15 -5 35 -15 Z' class="animated-bow"/>
+            <circle cx='0' cy='0' r='14' class="animated-bow"/>
+        </g>
+    </svg>
+</div>
 <div class="book" id="book">
 
-    <!-- PÁGINA 1 -->
     <div class="page-spread">
         <div class="page page-front">
             <h1> Diario 🧑‍🎓🎀 (Página 1)</h1>
@@ -216,7 +259,6 @@
         </div>
     </div>
 
-    <!-- PÁGINA 2 -->
     <div class="page-spread">
         <div class="page page-front">
             <h1>Página 2 💗</h1>
@@ -244,7 +286,6 @@
         </div>
     </div>
 
-    <!-- PÁGINA 3 -->
     <div class="page-spread">
         <div class="page page-front">
             <h1>Página 3 🌸</h1>
@@ -266,7 +307,6 @@
 
 </div>
 
-<!-- BOTONES -->
 <div class="nav-buttons">
     <button onclick="prevPage()">⟨ Anterior</button>
     <button onclick="nextPage()">Siguiente ⟩</button>
