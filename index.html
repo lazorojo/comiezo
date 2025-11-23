@@ -32,6 +32,14 @@
 </g>\
 </svg>");
         background-size: 120px 120px;
+
+        /* INICIO DE LAS NUEVAS LÍNEAS PARA LA ANIMACIÓN DEL FONDO */
+    animation-name: float-bows; /* Nombre de nuestra nueva animación */
+    animation-duration: 3s;    /* Duración de 10 segundos para un movimiento muy suave */
+    animation-iteration-count: infinite; /* Que se repita infinitamente */
+    animation-timing-function: ease-in-out; /* Para que acelere y desacelere suavemente */
+    animation-direction: alternate; /* Para que la animación vaya y venga */
+    /* FIN DE LAS NUEVAS LÍNEAS */
     }
 
     /* ---------------------------
@@ -79,6 +87,14 @@
         }
     }
 
+@keyframes float-bows {
+    0% {
+        background-position: 0% 0%; /* Posición inicial del fondo */
+    }
+    100% {
+        background-position: 10% 10%; /* Se mueve 10% a la derecha y 10% hacia abajo */
+    }
+}
     /* ---------------------------
         CONTENEDOR DEL LIBRO
         --------------------------- */
