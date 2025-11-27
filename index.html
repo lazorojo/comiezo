@@ -12,6 +12,7 @@
     body {
         margin: 0;
         padding: 0;
+        
         font-family: "Comic Sans MS", cursive, sans-serif;
         display: flex;
         flex-direction: column;
@@ -239,6 +240,31 @@
         .page { width: 92%; height: 84%; padding: 24px; }
         .ruled-area { width: 92%; height: calc(100% - 80px); }
     }
+
+        .moño-btn {
+    font-size: 40px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+    margin-top: 10px;
+}
+
+.moño-btn:hover {
+    transform: scale(1.2) rotate(8deg);
+}
+
+.moño-btn.playing {
+    animation: latido 1s infinite ease-in-out;
+}
+
+@keyframes latido {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.25); }
+    100% { transform: scale(1); }
+}
+
+        
 </style>
 </head>
 <body>
@@ -331,10 +357,13 @@
 <main style="text-align: center; margin-top: 20px;">
     <h2 style="color: #ff7eb9; font-size: 1.5em; text-shadow: 1px 1px #ffd1ea; margin-bottom: 5px;">🎵 Música de Fondo 🎀</h2>
     
-   <audio id="miAudioKawaii" controls src="musica_fondo.mp3">
-    Tu navegador no soporta el audio MP3.
-</audio>
+  <audio id="miAudioKawaii" src="musica_fondo.mp3"></audio>
 
+<button id="botonMoño" class="moño-btn">
+    🎀
+</button>
+
+    
 </main>
     
 <div class="nav-buttons">
@@ -372,6 +401,21 @@
     }
 
     updatePages();
+
+const audio = document.getElementById("miAudioKawaii");
+const boton = document.getElementById("botonMoño");
+
+boton.addEventListener("click", () => {
+    if (audio.paused) {
+        audio.play();
+        boton.classList.add("playing");
+    } else {
+        audio.pause();
+        boton.classList.remove("playing");
+    }
+});
+
+    
 </script>
 
 </body>
