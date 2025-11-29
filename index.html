@@ -143,7 +143,8 @@ padding: 40px 0;             /* opcional: ajusta el espaciado superior/inferior 
         box-shadow: 0 10px 30px rgba(255, 150, 190, 0.25);
 
         backface-visibility: hidden;
-        overflow: hidden;
+    overflow-y: auto;
+overflow-x: hidden;
         touch-action: manipulation;
         display: flex;
         flex-direction: column;
@@ -428,6 +429,7 @@ boton.addEventListener("click", () => {
         boton.classList.remove("playing");
     }
 });
+
 
     
 </script>
