@@ -12,16 +12,20 @@
     body {
         margin: 0;  
         
-       /* reemplaza en body: */
-justify-content: flex-start; /* <- antes estaba center */
-align-items: center;
-min-height: auto;            /* <- quitar 100vh */
-overflow-y: auto;            /* permite scroll vertical en body */
--webkit-overflow-scrolling: touch; /* mejor deslizamiento en iOS */
-padding: 40px 0;             /* opcional: ajusta el espaciado superior/inferior */
+        /* ❤️ NECESARIOS PARA CENTRAR DE VERDAD EN PC */
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start; /* el libro inicia arriba */
+    align-items: center; /* el libro queda centrado en PC */
 
+    /* ❤️ PERMITE SCROLL */
+    min-height: auto;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
 
-        /* patrón SVG embebido */
+    padding: 40px 0;
+
+    /* ❤️ TU FONDO */
         background-color: #ffe6f2;
         background-image: url("data:image/svg+xml;utf8,\
 <svg xmlns='http://www.w3.org/2000/svg' width='120' height='120' viewBox='0 0 120 120'>\
