@@ -234,11 +234,20 @@
     }
 
     /* Responsive pequeño */
-    @media (max-width: 860px) {
-        .book { width: 92%; height: auto; }
-        .page { width: 92%; height: 84%; padding: 24px; }
-       .ruled-area { height: calc(100% - 70px); } 
+@media (max-width: 860px) {
+    .book { 
+        width: 92%; 
+        height: 600px; /* Mantiene perfecto en teléfono */
     }
+    .page { 
+        width: 92%; 
+        height: 88%;
+        padding: 24px; 
+    }
+    .ruled-area { 
+        height: calc(100% - 70px); 
+    } 
+}
 
       @media (max-width: 700px) {
     #bow-ribbon {
@@ -248,6 +257,19 @@
         height: 150px;
     }
 }
+
+        @media (min-width: 861px) {
+    .book {
+        height: 520px; /* ↓ Baja la altura total del libro */
+    }
+    .page {
+        height: 88%; /* La página se ajusta dentro del libro */
+    }
+    .ruled-area {
+        height: calc(100% - 80px); /* Corrige el área del texto */
+    }
+}
+
 
         .moño-btn {
     font-size: 40px;
