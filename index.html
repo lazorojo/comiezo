@@ -106,7 +106,7 @@
     .book {
         width: 90%;
     max-width: 800px;
-    height: auto;      /* que la altura se adapte */
+    height: 600px;      /* que la altura se adapte */
     min-height: 500px; /* opcional para mantener proporción en desktop */
     position: relative;
     perspective: 2000px;
@@ -132,7 +132,7 @@
         --------------------------- */
     .page {
         width: 88%;
-        height: 86%;
+        height: 90%;
         position: absolute;
         top: 0; left: 0; right: 0; bottom: 0;
         margin: auto;
@@ -209,17 +209,13 @@
     }
 
     /* BOTONES */
-    .nav-buttons {
-      position: static; /* o simplemente elimina la propiedad position */
-    bottom: auto;
-    width: 100%;
+  .nav-buttons {
+    margin-top: 15px; /* quedan pegaditos al libro */
     display: flex;
     justify-content: space-between;
-    max-width: 800px;
-    margin: 12px 0 0; /* separa del libro */
-    box-sizing: border-box;
-    padding: 0 10px;
-    }
+    width: 90%;       /* mismo ancho visual del libro */
+    max-width: 800px; /* idéntico al contenedor .book */
+}
 
     button {
         background: #ff7eb9;
