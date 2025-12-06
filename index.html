@@ -234,6 +234,9 @@
     }
 
     /* Responsive pequeño */
+
+        
+        
 @media (max-width: 860px) {
     .book { 
         width: 92%; 
@@ -258,17 +261,18 @@
     }
 }
 
-        @media (min-width: 861px) {
-    .book {
-        height: 520px; /* ↓ Baja la altura total del libro */
-    }
-    .page {
-        height: 88%; /* La página se ajusta dentro del libro */
-    }
-    .ruled-area {
-        height: calc(100% - 80px); /* Corrige el área del texto */
+/* Botones para TELEFONO */
+@media (max-width: 860px) {
+    .nav-buttons {
+        position: relative;
+        bottom: 70px;   /* ← AJUSTA ESTE VALOR PARA SUBIRLOS */
+        margin-top: 0;
+        margin-bottom: 0;
     }
 }
+
+        
+ 
         @media (min-width: 861px) {
     .nav-buttons {
         margin-top: 10px;        /* Reduce espacio encima */
@@ -276,14 +280,8 @@
         position: relative;
         bottom: 85px;            /* ¡SUBE los botones! */
     }
-            /* SUBIR BOTONES EN TELÉFONO */
-@media (max-width: 860px) {
-    .nav-buttons {
-        position: relative;
-        bottom: 60px;  /* ajústalo a tu gusto */
-        margin-top: 0;
-    }
-}
+
+            
 
 
     .book {
