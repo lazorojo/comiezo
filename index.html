@@ -11,7 +11,7 @@
         --------------------------- */
     body {
         margin: 0;  
-        
+        justify-content: flex-start;
         /* ❤️ NECESARIOS PARA CENTRAR DE VERDAD EN PC */
     display: flex;
     flex-direction: column;
@@ -147,8 +147,7 @@
         box-shadow: 0 10px 30px rgba(255, 150, 190, 0.25);
 
         backface-visibility: hidden;
-    overflow-y: auto;
-overflow-x: hidden;
+     overflow: visible; 
         touch-action: manipulation;
         display: flex;
         flex-direction: column;
@@ -177,20 +176,16 @@ overflow-x: hidden;
         height: calc(100% - 90px);
         min-height: 220px;
         box-sizing: border-box;
-
-        border-left: 4px solid #ff7eb9;
-
+        border-left: 5px solid #ff7eb9;
         background-image: repeating-linear-gradient(
             to bottom,
-            rgba(255, 120, 170, 0.14) 0px,
-            rgba(255, 120, 170, 0.14) 1px,
+            rgba(255, 120, 170, 0.10) 0px,
+            rgba(255, 120, 170, 0.10) 1px,
             transparent 1px,
             transparent 32px
         );
-
         background-color: rgba(255, 255, 255, 0.85);
         border-radius: 12px;
-
         overflow-y: auto;
         -webkit-overflow-scrolling: touch;
         touch-action: pan-y;
@@ -209,7 +204,7 @@ overflow-x: hidden;
 
     .entry-content {
         margin-bottom: 12px;
-        line-height: 1.6;
+        line-height: 1.75;
         text-align: justify;
     }
 
