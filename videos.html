@@ -75,16 +75,24 @@ h2 {
 
 /* POSICIONES de cada video */
 .pos-left {
-    left: 10%;
+    left: 8%;
 }
 
+/* Video 2: aparece en la izquierda y se desliza */
 .pos-center-slide {
-    left: 10%;
+    left: 8%;
     transform: translateX(0);
 }
 
+/* Video 3: aparece más a la derecha (centro suave) */
+.pos-mid {
+    left: 45%;
+    transform: translateX(-50%);
+}
+
+/* Video 4: aparece a la derecha */
 .pos-right {
-    right: 10%;
+    right: 8%;
 }
 
 /* Cuando aparece */
@@ -96,6 +104,7 @@ h2 {
 .slide {
     transform: translateX(160px);
 }
+
 
 </style>
 </head>
@@ -115,11 +124,12 @@ h2 {
 
 <!-- VIDEOS ABAJO -->
 <div class="video-strip">
-    <video class="video-box pos-left" id="v1" muted></video>
-    <video class="video-box pos-center-slide" id="v2" muted></video>
-    <video class="video-box pos-left" id="v3" muted></video>
-    <video class="video-box pos-right" id="v4" muted></video>
+    <video class="video-box pos-left" id="v1" muted autoplay loop playsinline></video>
+    <video class="video-box pos-center-slide" id="v2" muted autoplay loop playsinline></video>
+    <video class="video-box pos-mid" id="v3" muted autoplay loop playsinline></video>
+    <video class="video-box pos-right" id="v4" muted autoplay loop playsinline></video>
 </div>
+
 
 <script>
 /* ===== ASIGNAR VIDEOS ===== */
