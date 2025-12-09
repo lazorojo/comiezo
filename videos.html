@@ -11,9 +11,10 @@ body {
     margin: 0;
     font-family: "Comic Sans MS", Arial, sans-serif;
     text-align: center;
-    padding-bottom: 160px;
+    padding-bottom: 200px;
 }
 
+/* ===== TÍTULOS ===== */
 h1 {
     color: #5fa8d3;
     margin-top: 20px;
@@ -24,73 +25,78 @@ h2 {
     margin-top: -10px;
 }
 
+/* ===== FOTOS ===== */
 .center-photo-frame {
     width: 90%;
     max-width: 350px;
     margin: 30px auto;
     position: relative;
+    height: 350px;
 }
 
 .center-photo {
     width: 100%;
+    height: 100%;
+    object-fit: cover;
     border-radius: 20px;
     box-shadow: 0 0 15px rgba(90, 140, 180, 0.4);
     position: absolute;
     top: 0;
     left: 0;
     opacity: 0;
-    transform: rotate(-6deg) scale(0.9);
-    transition: opacity 1.2s ease, transform 1.2s ease;
+    transition: opacity 1.8s ease;
 }
 
 .center-photo.visible {
     opacity: 1;
-    transform: rotate(0deg) scale(1);
 }
 
+/* ===== VIDEOS ABAJO ===== */
 .video-strip {
     position: fixed;
-    bottom: 10px;
-    left: 50%;
-    transform: translateX(-50%);
+    bottom: 20px;
+    width: 100%;
+    height: 130px;
     display: flex;
-    gap: 12px;
-    z-index: 200;
+    justify-content: center;
+    align-items: center;
+    pointer-events: none;
 }
 
-.video-thumb {
-    width: 110px;
-    height: 110px;
+.video-box {
+    position: absolute;
+    width: 140px;
+    height: 140px;
+    opacity: 0;
     border-radius: 12px;
     overflow: hidden;
-    opacity: 0.4;
-    transition: opacity 1s ease;
+    transition: opacity 1.2s ease, transform 2s ease;
 }
 
-.video-thumb.active {
+/* POSICIONES de cada video */
+.pos-left {
+    left: 10%;
+}
+
+.pos-center-slide {
+    left: 10%;
+    transform: translateX(0);
+}
+
+.pos-right {
+    right: 10%;
+}
+
+/* Cuando aparece */
+.show {
     opacity: 1;
-    box-shadow: 0 0 10px rgba(0,0,0,0.3);
 }
 
-#main-video {
-    width: 90%;
-    max-width: 450px;
-    border-radius: 20px;
-    margin-top: 20px;
-    box-shadow: 0 0 18px rgba(90, 140, 180, 0.4);
-    opacity: 0;
-    transition: opacity 1.2s ease;
+/* Deslizamiento para video 2 */
+.slide {
+    transform: translateX(160px);
 }
 
-#main-video.fade-in { opacity: 1; }
-#main-video.fade-out { opacity: 0; }
-
-@media(max-width: 600px) {
-    .video-thumb {
-        width: 80px;
-        height: 80px;
-    }
-}
 </style>
 </head>
 
@@ -99,84 +105,72 @@ h2 {
 <h1>✨ Momentos con mi Abuelito ✨</h1>
 <h2>Mis recuerdos más hermosos</h2>
 
+<!-- FOTOS -->
 <div class="center-photo-frame">
-    <img src="1000006433.jpg" class="center-photo" id="img1">
-    <img src="1000006434.jpg" class="center-photo" id="img2">
-    <img src="1000006435.jpg" class="center-photo" id="img3">
-    <img src="1000006436.jpg" class="center-photo" id="img4">
+    <img src="1000006433.jpg" class="center-photo" id="photo1">
+    <img src="1000006434.jpg" class="center-photo" id="photo2">
+    <img src="1000006435.jpg" class="center-photo" id="photo3">
+    <img src="1000006436.jpg" class="center-photo" id="photo4">
 </div>
 
-<video id="main-video" autoplay muted></video>
-
+<!-- VIDEOS ABAJO -->
 <div class="video-strip">
-    <video class="video-thumb" id="thumb1" muted></video>
-    <video class="video-thumb" id="thumb2" muted></video>
-    <video class="video-thumb" id="thumb3" muted></video>
-    <video class="video-thumb" id="thumb4" muted></video>
+    <video class="video-box pos-left" id="v1" muted></video>
+    <video class="video-box pos-center-slide" id="v2" muted></video>
+    <video class="video-box pos-left" id="v3" muted></video>
+    <video class="video-box pos-right" id="v4" muted></video>
 </div>
 
 <script>
-const videos = [
-    "video1.mp4",
-    "video2.mp4",
-    "video3.mp4",
-    "video4.mp4"
+/* ===== ASIGNAR VIDEOS ===== */
+const sources = ["video1.mp4", "video2.mp4", "video3.mp4", "video4.mp4"];
+const boxes = [
+    document.getElementById("v1"),
+    document.getElementById("v2"),
+    document.getElementById("v3"),
+    document.getElementById("v4")
 ];
 
-const thumbs = [
-    document.getElementById("thumb1"),
-    document.getElementById("thumb2"),
-    document.getElementById("thumb3"),
-    document.getElementById("thumb4")
-];
+boxes.forEach((v, i) => v.src = sources[i]);
 
+/* ===== ANIMACIÓN DE VIDEOS ===== */
+let n = 0;
+function showVideo() {
+    boxes.forEach(b => {
+        b.classList.remove("show", "slide");
+    });
+
+    let b = boxes[n];
+    b.classList.add("show");
+
+    if(n === 1) {
+        setTimeout(() => b.classList.add("slide"), 200);
+    }
+
+    n = (n + 1) % 4;
+}
+
+showVideo();
+setInterval(showVideo, 5000);
+
+/* ===== SLIDESHOW DE FOTOS INDEPENDIENTE ===== */
 const photos = [
-    document.getElementById("img1"),
-    document.getElementById("img2"),
-    document.getElementById("img3"),
-    document.getElementById("img4")
+    document.getElementById("photo1"),
+    document.getElementById("photo2"),
+    document.getElementById("photo3"),
+    document.getElementById("photo4")
 ];
 
-let current = 0;
+let p = 0;
 
-// Mostrar fotos con animación
-function showPhoto(i) {
-    photos.forEach(p => p.classList.remove("visible"));
-    photos[i].classList.add("visible");
+function changePhoto() {
+    photos.forEach(ph => ph.classList.remove("visible"));
+    photos[p].classList.add("visible");
+    p = (p + 1) % photos.length;
 }
 
-// Cargar miniaturas
-thumbs.forEach((thumb, i) => {
-    thumb.src = videos[i];
-});
-
-// Cambiar video con animación suave
-function playVideo(i) {
-    const mainVideo = document.getElementById("main-video");
-
-    mainVideo.classList.remove("fade-in");
-    mainVideo.classList.add("fade-out");
-
-    setTimeout(() => {
-        mainVideo.src = videos[i];
-        mainVideo.classList.remove("fade-out");
-        mainVideo.classList.add("fade-in");
-    }, 800);
-
-    thumbs.forEach(t => t.classList.remove("active"));
-    thumbs[i].classList.add("active");
-
-    showPhoto(i);
-}
-
-playVideo(0);
-showPhoto(0);
-
-// Click en miniaturas
-thumbs.forEach((thumb, i) => {
-    thumb.addEventListener("click", () => playVideo(i));
-});
+changePhoto();
+setInterval(changePhoto, 4000);
 </script>
 </body>
 </html>
-
