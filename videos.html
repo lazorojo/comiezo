@@ -3,155 +3,91 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Momentos con mi Abuelito 🎀</title>
+<title>Momentos con mi Abuelito</title>
 
 <style>
-/* ----------------- ESTILOS GENERALES ----------------- */
 body {
-    background: #fffafc;
+    background: #eaf6ff; /* azul pastel */
     margin: 0;
-    font-family: Arial, sans-serif;
+    font-family: "Comic Sans MS", Arial, sans-serif;
     text-align: center;
-    padding-bottom: 140px;
+    padding-bottom: 160px; /* deja espacio para las miniaturas */
 }
 
-/* Título */
+/* ----- TÍTULO ----- */
 h1 {
-    color: #ff76b8;
-    text-shadow: 1px 1px #ffd4ea;
-    margin-top: 25px;
+    color: #5fa8d3;
+    margin-top: 20px;
+    text-shadow: 1px 1px #ffffff;
 }
-
-p.subtitle {
+h2 {
+    color: #7bbce6;
     margin-top: -10px;
-    color: #ff9acb;
-    font-size: 18px;
 }
 
-/* ----------------- ÁREA DEL VIDEO PRINCIPAL ----------------- */
-#main-video {
+/* ----- IMÁGENES AL CENTRO ----- */
+.center-photo-frame {
     width: 90%;
-    max-width: 450px;
-    border-radius: 22px;
-    box-shadow: 0 0 18px rgba(255, 140, 180, 0.45);
-    opacity: 0;
-    transition: opacity 1.2s ease;
+    max-width: 350px;
+    margin: 30px auto;
+    position: relative;
 }
 
-.fade-in { opacity: 1 !important; }
-.fade-out { opacity: 0 !important; }
+.center-photo {
+    width: 100%;
+    border-radius: 20px;
+    box-shadow: 0 0 15px rgba(90, 140, 180, 0.4);
+    position: absolute;
+    top: 0;
+    left: 0;
+    opacity: 0;
+    transform: rotate(-6deg) scale(0.9);
+    transition: opacity 1.2s ease, transform 1.2s ease;
+}
 
-/* ----------------- MINIATURAS ----------------- */
+.center-photo.visible {
+    opacity: 1;
+    transform: rotate(0deg) scale(1);
+}
+
+/* ----- MINIATURAS DE VIDEOS ----- */
 .video-strip {
     position: fixed;
     bottom: 10px;
     left: 50%;
     transform: translateX(-50%);
     display: flex;
-    gap: 14px;
+    gap: 12px;
     z-index: 200;
 }
 
-/* Miniatura base */
 .video-thumb {
     width: 110px;
     height: 110px;
-    border-radius: 16px;
+    border-radius: 12px;
     overflow: hidden;
     opacity: 0.4;
-    transition: all 0.6s ease;
-    border: 3px solid transparent;
+    transition: opacity 1s ease;
 }
 
-/* Miniatura activa */
 .video-thumb.active {
     opacity: 1;
-    transform: scale(1.18);
-    border-color: #ff7eb9;
-    box-shadow: 0 0 12px rgba(255, 120, 170, 0.6);
+    box-shadow: 0 0 10px rgba(0,0,0,0.3);
 }
 
-/* Miniatura visible desde inicio */
-.video-thumb.loaded {
-    opacity: 0.7;
-}
-</style>
-
-</head>
-<body>
-
-<h1>✨ Momentos con mi Abuelito ✨</h1>
-<p class="subtitle">Mis recuerdos más especiales</p>
-
-<!-- VIDEO PRINCIPAL -->
-<video id="main-video" autoplay muted></video>
-
-<!-- MINIATURAS -->
-<div class="video-strip">
-    <video class="video-thumb" id="thumb1" muted></video>
-    <video class="video-thumb" id="thumb2" muted></video>
-    <video class="video-thumb" id="thumb3" muted></video>
-    <video class="video-thumb" id="thumb4" muted></video>
-</div>
-
-<script>
-/* ----------------- LISTA DE VIDEOS ----------------- */
-const videos = [
-    "video1.mp4",  // Nieta abrazando al abuelo
-    "video2.mp4",  // Caminando
-    "video3.mp4",  // Comiendo
-    "video4.mp4"   // Video 4
-];
-
-/* Obtención de elementos */
-const mainVideo = document.getElementById("main-video");
-const thumbs = [
-    document.getElementById("thumb1"),
-    document.getElementById("thumb2"),
-    document.getElementById("thumb3"),
-    document.getElementById("thumb4")
-];
-
-let index = 0;
-
-/* ----------------- CARGAR MINIATURAS ----------------- */
-thumbs.forEach((thumb, i) => {
-    thumb.src = videos[i];
-    thumb.loop = true;
-    thumb.play();
-    thumb.classList.add("loaded"); // se hacen visibles suavemente
-});
-
-/* ----------------- FUNCIÓN PRINCIPAL DE SECUENCIA ----------------- */
-function playSequence() {
-    mainVideo.classList.remove("fade-in", "fade-out");
-    mainVideo.src = videos[index];
-    mainVideo.load();
-
-    /* Miniatura activa */
-    thumbs.forEach(t => t.classList.remove("active"));
-    thumbs[index].classList.add("active");
-
-    /* Suave aparición */
-    setTimeout(() => {
-        mainVideo.classList.add("fade-in");
-        mainVideo.play();
-    }, 150);
-
-    /* Cuando termina → pasa al siguiente */
-    mainVideo.onended = () => {
-        mainVideo.classList.remove("fade-in");
-        mainVideo.classList.add("fade-out");
-
-        setTimeout(() => {
-            index = (index + 1) % videos.length;
-            playSequence();
-        }, 1200);
-    };
+/* ----- VIDEO PRINCIPAL ----- */
+#main-video {
+    width: 90%;
+    max-width: 450px;
+    border-radius: 20px;
+    margin-top: 20px;
+    box-shadow: 0 0 18px rgba(90, 140, 180, 0.4);
+    opacity: 0;
+    transition: opacity 1.2s ease;
 }
 
-playSequence();
-</script>
+#main-video.fade-in { opacity: 1; }
+#main-video.fade-out { opacity: 0; }
 
-</body>
-</html>
+/* ----- RESPONSIVE ----- */
+@media(max-widt
