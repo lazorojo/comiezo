@@ -7,14 +7,13 @@
 
 <style>
 body {
-    background: #eaf6ff; /* azul pastel */
+    background: #eaf6ff;
     margin: 0;
     font-family: "Comic Sans MS", Arial, sans-serif;
     text-align: center;
-    padding-bottom: 160px; /* deja espacio para las miniaturas */
+    padding-bottom: 160px;
 }
 
-/* ----- TÍTULO ----- */
 h1 {
     color: #5fa8d3;
     margin-top: 20px;
@@ -25,7 +24,6 @@ h2 {
     margin-top: -10px;
 }
 
-/* ----- IMÁGENES AL CENTRO ----- */
 .center-photo-frame {
     width: 90%;
     max-width: 350px;
@@ -50,7 +48,6 @@ h2 {
     transform: rotate(0deg) scale(1);
 }
 
-/* ----- MINIATURAS DE VIDEOS ----- */
 .video-strip {
     position: fixed;
     bottom: 10px;
@@ -75,7 +72,6 @@ h2 {
     box-shadow: 0 0 10px rgba(0,0,0,0.3);
 }
 
-/* ----- VIDEO PRINCIPAL ----- */
 #main-video {
     width: 90%;
     max-width: 450px;
@@ -89,5 +85,52 @@ h2 {
 #main-video.fade-in { opacity: 1; }
 #main-video.fade-out { opacity: 0; }
 
-/* ----- RESPONSIVE ----- */
-@media(max-widt
+@media(max-width: 600px) {
+    .video-thumb {
+        width: 80px;
+        height: 80px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<h1>✨ Momentos con mi Abuelito ✨</h1>
+<h2>Mis recuerdos más hermosos</h2>
+
+<div class="center-photo-frame">
+    <img src="1000006433.jpg" class="center-photo" id="img1">
+    <img src="1000006434.jpg" class="center-photo" id="img2">
+    <img src="1000006435.jpg" class="center-photo" id="img3">
+    <img src="1000006436.jpg" class="center-photo" id="img4">
+</div>
+
+<video id="main-video" autoplay muted></video>
+
+<div class="video-strip">
+    <video class="video-thumb" id="thumb1" muted></video>
+    <video class="video-thumb" id="thumb2" muted></video>
+    <video class="video-thumb" id="thumb3" muted></video>
+    <video class="video-thumb" id="thumb4" muted></video>
+</div>
+
+<script>
+const videos = [
+    "video1.mp4",
+    "video2.mp4",
+    "video3.mp4",
+    "video4.mp4"
+];
+
+const thumbs = [
+    document.getElementById("thumb1"),
+    document.getElementById("thumb2"),
+    document.getElementById("thumb3"),
+    document.getElementById("thumb4")
+];
+
+const photos = [
+    document.getElementById("img1"),
+    document.getElementById("img2"),
+    document.getElementBy
