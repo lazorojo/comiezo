@@ -3,70 +3,90 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Momentos con mi Abuelo 🎀</title>
+<title>Momentos con mi Abuelito 🎀</title>
 
 <style>
+/* ----------------- ESTILOS GENERALES ----------------- */
 body {
     background: #fffafc;
     margin: 0;
     font-family: Arial, sans-serif;
     text-align: center;
-    padding-bottom: 120px; /* espacio para las miniaturas */
+    padding-bottom: 140px;
 }
 
-/* ---------------- MINIATURAS ---------------- */
+/* Título */
+h1 {
+    color: #ff76b8;
+    text-shadow: 1px 1px #ffd4ea;
+    margin-top: 25px;
+}
+
+p.subtitle {
+    margin-top: -10px;
+    color: #ff9acb;
+    font-size: 18px;
+}
+
+/* ----------------- ÁREA DEL VIDEO PRINCIPAL ----------------- */
+#main-video {
+    width: 90%;
+    max-width: 450px;
+    border-radius: 22px;
+    box-shadow: 0 0 18px rgba(255, 140, 180, 0.45);
+    opacity: 0;
+    transition: opacity 1.2s ease;
+}
+
+.fade-in { opacity: 1 !important; }
+.fade-out { opacity: 0 !important; }
+
+/* ----------------- MINIATURAS ----------------- */
 .video-strip {
     position: fixed;
     bottom: 10px;
     left: 50%;
     transform: translateX(-50%);
     display: flex;
-    gap: 12px;
+    gap: 14px;
     z-index: 200;
 }
 
+/* Miniatura base */
 .video-thumb {
     width: 110px;
     height: 110px;
-    border-radius: 12px;
+    border-radius: 16px;
     overflow: hidden;
-    opacity: 0;
-    transition: opacity 1.5s ease;
+    opacity: 0.4;
+    transition: all 0.6s ease;
+    border: 3px solid transparent;
 }
 
-/* ---------------- VIDEO PRINCIPAL ---------------- */
-#main-video-container {
-    margin-top: 30px;
+/* Miniatura activa */
+.video-thumb.active {
+    opacity: 1;
+    transform: scale(1.18);
+    border-color: #ff7eb9;
+    box-shadow: 0 0 12px rgba(255, 120, 170, 0.6);
 }
 
-#main-video {
-    width: 90%;
-    max-width: 450px;
-    border-radius: 20px;
-    box-shadow: 0 0 18px rgba(255, 140, 180, 0.4);
+/* Miniatura visible desde inicio */
+.video-thumb.loaded {
+    opacity: 0.7;
 }
-
-/* Animación aparecer / desaparecer */
-.fade-in { opacity: 1 !important; }
-.fade-out { opacity: 0 !important; }
 </style>
 
 </head>
 <body>
 
-<h1 style="color:#ff76b8; text-shadow:1px 1px #ffd4ea;">
-    ✨ Momentos con mi Abuelito ✨
-</h1>
+<h1>✨ Momentos con mi Abuelito ✨</h1>
+<p class="subtitle">Mis recuerdos más especiales</p>
 
-<p style="color:#ff9acb; margin-top: -10px; font-size: 18px;">
-    Mis recuerdos más especiales
-</p>
+<!-- VIDEO PRINCIPAL -->
+<video id="main-video" autoplay muted></video>
 
-<div id="main-video-container">
-    <video id="main-video" autoplay muted></video>
-</div>
-
-<!-- Miniaturas abajo -->
+<!-- MINIATURAS -->
 <div class="video-strip">
     <video class="video-thumb" id="thumb1" muted></video>
     <video class="video-thumb" id="thumb2" muted></video>
@@ -75,15 +95,16 @@ body {
 </div>
 
 <script>
-/* Nombres de tus videos — cámbialos por los reales */
+/* ----------------- LISTA DE VIDEOS ----------------- */
 const videos = [
     "video1.mp4",  // Nieta abrazando al abuelo
     "video2.mp4",  // Caminando
     "video3.mp4",  // Comiendo
-    "video4.mp4"   // El cuarto video
+    "video4.mp4"   // Video 4
 ];
 
-/* Miniaturas */
+/* Obtención de elementos */
+const mainVideo = document.getElementById("main-video");
 const thumbs = [
     document.getElementById("thumb1"),
     document.getElementById("thumb2"),
@@ -91,43 +112,41 @@ const thumbs = [
     document.getElementById("thumb4")
 ];
 
-const mainVideo = document.getElementById("main-video");
 let index = 0;
 
-/* Asignar las fuentes a las miniaturas */
-thumbs.forEach((t, i) => {
-    t.src = videos[i];
-    t.loop = true;
-    t.play();
+/* ----------------- CARGAR MINIATURAS ----------------- */
+thumbs.forEach((thumb, i) => {
+    thumb.src = videos[i];
+    thumb.loop = true;
+    thumb.play();
+    thumb.classList.add("loaded"); // se hacen visibles suavemente
 });
 
-/* Secuencia automatizada */
+/* ----------------- FUNCIÓN PRINCIPAL DE SECUENCIA ----------------- */
 function playSequence() {
     mainVideo.classList.remove("fade-in", "fade-out");
     mainVideo.src = videos[index];
     mainVideo.load();
 
-    // Espera un poquito antes de aparecer
+    /* Miniatura activa */
+    thumbs.forEach(t => t.classList.remove("active"));
+    thumbs[index].classList.add("active");
+
+    /* Suave aparición */
     setTimeout(() => {
         mainVideo.classList.add("fade-in");
-    }, 100);
+        mainVideo.play();
+    }, 150);
 
-    mainVideo.play();
-
-    // MINIATURA activa: aparece
-    thumbs[index].classList.add("fade-in");
-
-    // Cuando termina el video → desaparece y pasa al siguiente
+    /* Cuando termina → pasa al siguiente */
     mainVideo.onended = () => {
         mainVideo.classList.remove("fade-in");
         mainVideo.classList.add("fade-out");
 
-        thumbs[index].classList.remove("fade-in");
-
         setTimeout(() => {
-            index = (index + 1) % videos.length;  // siguiente video
+            index = (index + 1) % videos.length;
             playSequence();
-        }, 1500); // tiempo del fade out
+        }, 1200);
     };
 }
 
